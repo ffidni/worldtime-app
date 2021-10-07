@@ -20,7 +20,6 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     data = data.isEmpty ? ModalRoute.of(context).settings.arguments : data;
-    //set background
     String bgImage = data["daytime"] ? "day.jpg" : "night.jpg";
     if (timers.length > 0) {
       timers[0].cancel();
@@ -66,7 +65,8 @@ class _HomeState extends State<Home> {
                 SizedBox(height: 10),
                 FlatButton.icon(
                   onPressed: () async {
-                    dynamic result = await Navigator.pushNamed(context, "/location");
+                    dynamic result =
+                        await Navigator.pushNamed(context, "/location");
                     if (result != null) {
                       setState(() {
                         data = {

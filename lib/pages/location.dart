@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/world_time.dart';
+import 'package:http/http.dart';
 
 class Location extends StatefulWidget {
   _LocationState createState() => _LocationState();
@@ -388,6 +389,7 @@ class _LocationState extends State<Location> {
   List<WorldTime> searchList = [];
   bool _isSearching = false;
   bool _isLoading = false;
+  bool _isConnected = true;
 
   void searchLocation(String keyword) {
     searchList = [];
@@ -408,22 +410,42 @@ class _LocationState extends State<Location> {
   }
 
   void updateTime(index) async {
-    toggleLoading();
-    WorldTime instance = searchList[index];
-    await instance.getTime();
-    toggleLoading();
-    Navigator.pop(context, {
-      "location": instance.location,
-      "time": instance.now,
-      "menuFlag": instance.menuFlag,
-      "daytime": instance.isDaytime,
+    _isConnected = await isConnect();
+    if (_isConnected) {
+      toggleLoading();
+      WorldTime instance = searchList[index];
+      await instance.getTime();
+      if (instance.now == false) {
+        updateTime(index);
+      }
+      Navigator.pop(context, {
+        "location": instance.location,
+        "time": instance.now,
+        "menuFlag": instance.menuFlag,
+        "daytime": instance.isDaytime,
+      });
+    } else {
+      conHandler(_isConnected);
+    }
+  }
+
+  void conHandler([isConnected = false]) async {
+    _isConnected = isConnected ? isConnected : await isConnect();
+    print(_isConnected);
+    setState(() {
+      _isConnected = _isConnected;
     });
+    if (!_isConnected) {
+      await Future.delayed(Duration(seconds: 1));
+      conHandler();
+    }
   }
 
   @override
   void initState() {
     super.initState();
     searchList = locationsWidget;
+    conHandler();
   }
 
   void _toggleSearching() {
@@ -433,81 +455,92 @@ class _LocationState extends State<Location> {
     });
   }
 
+  Future<bool> isConnect() async {
+    try {
+      Response response = await get(Uri.parse("https://google.com/"));
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return _isLoading
-        ? Scaffold(
-            backgroundColor: Colors.grey[200],
-            body: const Center(
-              child: CircularProgressIndicator(),
-            ))
-        : Scaffold(
-            backgroundColor: Colors.grey[200],
-            appBar: AppBar(
-              title: _isSearching
-                  ? Container(
-                      width: 230,
-                      height: 45,
-                      child: TextField(
-                        onChanged: (text) {
-                          searchLocation(text);
-                        },
-                        autofocus: true,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          contentPadding: EdgeInsets.zero,
-                          border: OutlineInputBorder(),
-                          hintText: "Search location",
-                          prefixIcon: Icon(Icons.search),
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.cancel),
-                            onPressed: _toggleSearching,
-                          ),
-                        ),
-                      ),
-                    )
-                  : Text("Select location"),
-              actions: !_isSearching
-                  ? <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(right: 20.0),
-                        child: IconButton(
-                          onPressed: _toggleSearching,
-                          icon: Icon(
-                            Icons.search,
-                            size: 26.0,
-                          ),
-                        ),
-                      ),
-                    ]
-                  : null,
-              centerTitle: true,
-              backgroundColor: Colors.blue[600],
-            ),
-            body: ListView.builder(
-              itemCount: searchList.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
-                    child: ListTile(
-                      onTap: () {
-                        updateTime(index);
-                      },
-                      title: Text(searchList[index].location),
-                      leading: CircleAvatar(
-                        backgroundImage:
-                            searchList[index].listFlag.contains("http")
-                                ? NetworkImage(searchList[index].listFlag)
-                                : AssetImage(searchList[index].listFlag),
-                      ),
+    return Scaffold(
+      backgroundColor: Colors.grey[200],
+      appBar: AppBar(
+        title: _isSearching
+            ? Container(
+                width: 230,
+                height: 45,
+                child: TextField(
+                  onChanged: (text) {
+                    searchLocation(text);
+                  },
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    contentPadding: EdgeInsets.zero,
+                    border: OutlineInputBorder(),
+                    hintText: "Search location",
+                    prefixIcon: Icon(Icons.search),
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.cancel),
+                      onPressed: _toggleSearching,
                     ),
                   ),
-                );
-              },
-            ),
-          );
+                ),
+              )
+            : Text("Select location"),
+        actions: !_isSearching
+            ? <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: IconButton(
+                    onPressed: (_isLoading || !_isConnected)
+                        ? () {}
+                        : _toggleSearching,
+                    icon: Icon(
+                      Icons.search,
+                      size: 26.0,
+                    ),
+                  ),
+                ),
+              ]
+            : null,
+        centerTitle: true,
+        backgroundColor: Colors.blue[600],
+      ),
+      body: !_isConnected
+          ? Center(child: Text("You are not conneted to any connection."))
+          : (_isLoading
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : ListView.builder(
+                  itemCount: searchList.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 4, horizontal: 2),
+                        child: ListTile(
+                          onTap: () {
+                            updateTime(index);
+                          },
+                          title: Text(searchList[index].location),
+                          leading: CircleAvatar(
+                            backgroundImage:
+                                searchList[index].listFlag.contains("http")
+                                    ? NetworkImage(searchList[index].listFlag)
+                                    : AssetImage(searchList[index].listFlag),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                )),
+    );
   }
 }

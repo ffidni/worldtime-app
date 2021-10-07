@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import '../services/world_time.dart';
 import 'package:http/http.dart';
@@ -10,7 +12,7 @@ class Loading extends StatefulWidget {
 class _LoadingState extends State<Loading> {
   bool _isConnected = true;
 
-  Future<List<String>> getCurrLocation() async {
+  Future<dynamic> getCurrLocation() async {
     try {
       Response ipResponse =
           await get(Uri.parse("https://api.ipify.org/?format=json"));
@@ -22,8 +24,8 @@ class _LoadingState extends State<Loading> {
       String capital = tmData["timezone"]["capital"];
       String countryCode = tmData["timezone"]["country_code"];
       return [tmName, capital, countryCode];
-    } catch (e) {
-      print(e);
+    } on SocketException {
+      return false;
     }
   }
 
@@ -34,27 +36,28 @@ class _LoadingState extends State<Loading> {
   }
 
   void setupWorldTime() async {
-    List<String> userData;
-    try {
-      userData = await getCurrLocation();
-    } catch (e) {
+    var userData = await getCurrLocation();
+    if (userData == false) {
       setConnection(false);
+      await Future.delayed(Duration(seconds: 1));
+      print("A");
       setupWorldTime();
+    } else {
+      setConnection(true);
+      WorldTime instance = WorldTime(userData[0], userData[1], userData[2]);
+      await instance.getTime();
+      Navigator.pushReplacementNamed(
+        context,
+        "/home",
+        arguments: {
+          "location": instance.location,
+          "time": instance.now,
+          "listFlag": instance.listFlag,
+          "menuFlag": instance.menuFlag,
+          "daytime": instance.isDaytime,
+        },
+      );
     }
-    setConnection(true);
-    WorldTime instance = WorldTime(userData[0], userData[1], userData[2]);
-    await instance.getTime();
-    Navigator.pushReplacementNamed(
-      context,
-      "/home",
-      arguments: {
-        "location": instance.location,
-        "time": instance.now,
-        "listFlag": instance.listFlag,
-        "menuFlag": instance.menuFlag,
-        "daytime": instance.isDaytime,
-      },
-    );
   }
 
   @override
@@ -70,7 +73,7 @@ class _LoadingState extends State<Loading> {
         body: Center(
           child: _isConnected
               ? CircularProgressIndicator()
-              : Text("Please connect to the internet."),
+              : Text("You are not connected to any connection!"),
         ));
   }
 }

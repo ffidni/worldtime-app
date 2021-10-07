@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:http/http.dart';
 import 'dart:convert';
 
@@ -29,10 +30,10 @@ class WorldTime {
       String dateTime = data["utc_datetime"];
       String offset = data["utc_offset"].substring(0, 3);
       now = DateTime.parse(dateTime).add(Duration(hours: int.parse(offset)));
-
       isDaytime = now.hour > 6 && now.hour < 19;
-    } catch (e) {
-      now = "Could not get the data";
+    } on SocketException {
+      now = false;
+      isDaytime = false;
     }
   }
 }
