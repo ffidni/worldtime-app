@@ -5,6 +5,28 @@ import '../services/world_time.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
 
+Widget loadingUi(_isConnected) {
+  return Scaffold(
+      backgroundColor: Colors.grey[200],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _isConnected
+                ? CircularProgressIndicator()
+                : Text("You are not connected to any connection!"),
+            SizedBox(height: 20),
+            Text(
+              "Getting data",
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            )
+          ],
+        ),
+      ));
+}
+
 class Loading extends StatefulWidget {
   _LoadingState createState() => _LoadingState();
 }
@@ -40,7 +62,6 @@ class _LoadingState extends State<Loading> {
     if (userData == false) {
       setConnection(false);
       await Future.delayed(Duration(seconds: 1));
-      print("A");
       setupWorldTime();
     } else {
       setConnection(true);
@@ -68,12 +89,6 @@ class _LoadingState extends State<Loading> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.grey[200],
-        body: Center(
-          child: _isConnected
-              ? CircularProgressIndicator()
-              : Text("You are not connected to any connection!"),
-        ));
+    return loadingUi(_isConnected);
   }
 }

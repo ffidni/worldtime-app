@@ -9,7 +9,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   Map data = {};
-  List<Timer> timers = [];
+  bool _isLoading = false;
 
   void updateTime() {
     setState(() {
@@ -18,15 +18,24 @@ class _HomeState extends State<Home> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    newTimer();
+  }
+
+  void newTimer() {
+    Timer t =
+        Timer.periodic(Duration(seconds: 60 - DateTime.now().second), (timer) {
+      timer.cancel();
+      updateTime();
+      newTimer();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     data = data.isEmpty ? ModalRoute.of(context).settings.arguments : data;
     String bgImage = data["daytime"] ? "day.jpg" : "night.jpg";
-    if (timers.length > 0) {
-      timers[0].cancel();
-      timers.remove(timers[0]);
-    }
-    Timer t = Timer(Duration(seconds: 60 - DateTime.now().second), updateTime);
-    timers.add(t);
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -63,32 +72,41 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 SizedBox(height: 10),
-                FlatButton.icon(
-                  onPressed: () async {
-                    dynamic result =
-                        await Navigator.pushNamed(context, "/location");
-                    if (result != null) {
-                      setState(() {
-                        data = {
-                          'time': result['time'],
-                          'menuFlag': result['menuFlag'],
-                          'daytime': result['daytime'],
-                          'location': result['location'],
-                        };
-                      });
-                    }
-                  },
-                  label: Text(
-                    "Edit location",
-                    style: TextStyle(
-                      color: Colors.grey[400],
-                    ),
-                  ),
-                  icon: Icon(
-                    Icons.edit_location,
-                    color: Colors.grey[400],
-                  ),
-                ),
+                _isLoading
+                    ? CircularProgressIndicator()
+                    : FlatButton.icon(
+                        onPressed: () async {
+                          setState(() {
+                            _isLoading = true;
+                          });
+                          dynamic result =
+                              await Navigator.pushNamed(context, "/location");
+                          if (result != null) {
+                            setState(() {
+                              data = {
+                                'time': result['time'],
+                                'menuFlag': result['menuFlag'],
+                                'daytime': result['daytime'],
+                                'location': result['location'],
+                              };
+                            });
+                          } else {
+                            setState(() {
+                              _isLoading = false;
+                            });
+                          }
+                        },
+                        label: Text(
+                          "Edit location",
+                          style: TextStyle(
+                            color: Colors.grey[400],
+                          ),
+                        ),
+                        icon: Icon(
+                          Icons.edit_location,
+                          color: Colors.grey[400],
+                        ),
+                      ),
               ],
             ),
           ),

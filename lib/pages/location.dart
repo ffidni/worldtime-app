@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/world_time.dart';
 import 'package:http/http.dart';
+import 'loading.dart';
 
 class Location extends StatefulWidget {
   _LocationState createState() => _LocationState();
@@ -431,7 +432,6 @@ class _LocationState extends State<Location> {
 
   void conHandler([isConnected = false]) async {
     _isConnected = isConnected ? isConnected : await isConnect();
-    print(_isConnected);
     setState(() {
       _isConnected = _isConnected;
     });
@@ -457,7 +457,7 @@ class _LocationState extends State<Location> {
 
   Future<bool> isConnect() async {
     try {
-      Response response = await get(Uri.parse("https://google.com/"));
+      Response response = await get(Uri.parse("https://example.com/"));
       return true;
     } catch (_) {
       return false;
@@ -468,56 +468,56 @@ class _LocationState extends State<Location> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      appBar: AppBar(
-        title: _isSearching
-            ? Container(
-                width: 230,
-                height: 45,
-                child: TextField(
-                  onChanged: (text) {
-                    searchLocation(text);
-                  },
-                  autofocus: true,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    contentPadding: EdgeInsets.zero,
-                    border: OutlineInputBorder(),
-                    hintText: "Search location",
-                    prefixIcon: Icon(Icons.search),
-                    suffixIcon: IconButton(
-                      icon: Icon(Icons.cancel),
-                      onPressed: _toggleSearching,
-                    ),
-                  ),
-                ),
-              )
-            : Text("Select location"),
-        actions: !_isSearching
-            ? <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(right: 20.0),
-                  child: IconButton(
-                    onPressed: (_isLoading || !_isConnected)
-                        ? () {}
-                        : _toggleSearching,
-                    icon: Icon(
-                      Icons.search,
-                      size: 26.0,
-                    ),
-                  ),
-                ),
-              ]
-            : null,
-        centerTitle: true,
-        backgroundColor: Colors.blue[600],
-      ),
-      body: !_isConnected
-          ? Center(child: Text("You are not conneted to any connection."))
-          : (_isLoading
-              ? Center(
-                  child: CircularProgressIndicator(),
-                )
+      appBar: _isLoading
+          ? null
+          : AppBar(
+              title: _isSearching
+                  ? Container(
+                      width: 230,
+                      height: 45,
+                      child: TextField(
+                        onChanged: (text) {
+                          searchLocation(text);
+                        },
+                        autofocus: true,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          contentPadding: EdgeInsets.zero,
+                          border: OutlineInputBorder(),
+                          hintText: "Search location",
+                          prefixIcon: Icon(Icons.search),
+                          suffixIcon: IconButton(
+                            icon: Icon(Icons.cancel),
+                            onPressed: _toggleSearching,
+                          ),
+                        ),
+                      ),
+                    )
+                  : Text("Select location"),
+              actions: !_isSearching
+                  ? <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(right: 20.0),
+                        child: IconButton(
+                          onPressed: (_isLoading || !_isConnected)
+                              ? () {}
+                              : _toggleSearching,
+                          icon: Icon(
+                            Icons.search,
+                            size: 26.0,
+                          ),
+                        ),
+                      ),
+                    ]
+                  : null,
+              centerTitle: true,
+              backgroundColor: Colors.blue[600],
+            ),
+      body: _isLoading
+          ? loadingUi(_isConnected)
+          : !_isConnected
+              ? Center(child: Text("You are not conneted to any connection."))
               : ListView.builder(
                   itemCount: searchList.length,
                   itemBuilder: (context, index) {
@@ -540,7 +540,7 @@ class _LocationState extends State<Location> {
                       ),
                     );
                   },
-                )),
+                ),
     );
   }
 }
