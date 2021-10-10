@@ -9,6 +9,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with WidgetsBindingObserver {
   Map data = {};
+  bool _isReload = false;
   var timer;
 
   void updateTime([m = 1]) {
@@ -29,17 +30,25 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
     super.didChangeAppLifecycleState(state);
     switch (state) {
       case AppLifecycleState.resumed:
+        newTimer();
+        var widget = data["widget"];
         List newData = await data["widget"].getTime(true);
         setState(() {
-          data["time"] = newData[0];
-          data["daytime"] = newData[1];
+          print("$widget ?= ${data['widget']}");
+          if (widget == data["widget"]) {
+            data["time"] = newData[0];
+            data["daytime"] = newData[1];
+          }
+          _isReload = false;
         });
-        newTimer();
         break;
       case AppLifecycleState.inactive:
         timer.cancel();
         break;
       case AppLifecycleState.paused:
+        setState(() {
+          _isReload = true;
+        });
         break;
       case AppLifecycleState.detached:
         break;
@@ -57,6 +66,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     data = data.isEmpty ? ModalRoute.of(context).settings.arguments : data;
+    print("$data from build()");
     String bgImage = data["daytime"] ? "day.jpg" : "night.jpg";
     return Scaffold(
       body: SafeArea(
@@ -86,13 +96,15 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                       color: Colors.grey[300],
                     )),
                 SizedBox(height: 10),
-                Text(
-                  DateFormat.jm().format(data["time"]),
-                  style: TextStyle(
-                    fontSize: 64,
-                    color: Colors.grey[200],
-                  ),
-                ),
+                _isReload
+                    ? CircularProgressIndicator()
+                    : Text(
+                        DateFormat.jm().format(data["time"]),
+                        style: TextStyle(
+                          fontSize: 64,
+                          color: Colors.grey[200],
+                        ),
+                      ),
                 SizedBox(height: 10),
                 FlatButton.icon(
                   onPressed: () async {
@@ -105,6 +117,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                           'menuFlag': result['menuFlag'],
                           'daytime': result['daytime'],
                           'location': result['location'],
+                          'widget': result['widget'],
                         };
                       });
                     }
