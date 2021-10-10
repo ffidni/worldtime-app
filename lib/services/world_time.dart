@@ -22,7 +22,7 @@ class WorldTime {
             : "assets/clock.png";
   }
 
-  Future<void> getTime() async {
+  Future<void> getTime([bool isReload = false]) async {
     try {
       Response response =
           await get(Uri.parse("https://worldtimeapi.org/api/timezone/$url"));
@@ -34,6 +34,9 @@ class WorldTime {
     } on SocketException {
       now = false;
       isDaytime = false;
+    }
+    if (isReload) {
+      return [now, isDaytime];
     }
   }
 }

@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:1:1-30:12
-INJECTED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:1:1-30:12
-INJECTED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:1:1-30:12
-INJECTED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:1:1-30:12
+ADDED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:1:1-31:12
+INJECTED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:1:1-31:12
+INJECTED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:1:1-31:12
+INJECTED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:1:1-31:12
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\asd\.gradle\caches\transforms-2\files-2.1\0986d0d74b8a2c7da8161f6370fc7744\fragment-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.activity:activity:1.0.0] C:\Users\asd\.gradle\caches\transforms-2\files-2.1\615cab8ad6393a9c868d48761bbea666\activity-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\asd\.gradle\caches\transforms-2\files-2.1\28d99d5113324aa067757f8ca41a426f\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
@@ -17,20 +17,20 @@ MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\asd\.gra
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\asd\.gradle\caches\transforms-2\files-2.1\077300052aa327ee6fc9bbb0ce309b24\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\asd\.gradle\caches\transforms-2\files-2.1\3a7eb299570065a3866b140e1a95969b\versionedparcelable-1.1.0\AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\asd\.gradle\caches\transforms-2\files-2.1\b80fad55c42c418cc210e235056767fb\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:1:1-30:12
-INJECTED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:1:1-30:12
-INJECTED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:1:1-30:12
+INJECTED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:1:1-31:12
+INJECTED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:1:1-31:12
+INJECTED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:1:1-31:12
 	package
 		ADDED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:2:5-40
 		INJECTED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:1:1-30:12
+		ADDED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:1:1-31:12
 		INJECTED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:1:1-30:12
+		ADDED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:1:1-31:12
 		INJECTED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:1:11-69
@@ -78,6 +78,10 @@ ADDED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_ap
 		ADDED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:28:13-30
 	android:name
 		ADDED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:27:13-44
+uses-permission#android.permission.INTERNET
+ADDED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:30:5-67
+	android:name
+		ADDED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml:30:22-64
 uses-sdk
 INJECTED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\asd\Desktop\coding-stuffs\flutter_learning\wta\world_time_app\android\app\src\main\AndroidManifest.xml

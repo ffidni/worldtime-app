@@ -1,0 +1,328 @@
+define(['dart_sdk', 'packages/flutter/src/widgets/widget_span.dart', 'packages/http/src/multipart_request.dart', 'packages/awesomequotes/services/world_time.dart', 'packages/flutter/src/material/icon_button.dart', 'packages/flutter/src/material/colors.dart', 'packages/flutter/src/rendering/flex.dart', 'packages/flutter/src/material/progress_indicator.dart', 'packages/flutter/src/painting/strut_style.dart'], (function load__packages__awesomequotes__pages__loading_dart(dart_sdk, packages__flutter__src__widgets__widget_span$46dart, packages__http__src__multipart_request$46dart, packages__awesomequotes__services__world_time$46dart, packages__flutter__src__material__icon_button$46dart, packages__flutter__src__material__colors$46dart, packages__flutter__src__rendering__flex$46dart, packages__flutter__src__material__progress_indicator$46dart, packages__flutter__src__painting__strut_style$46dart) {
+  'use strict';
+  const core = dart_sdk.core;
+  const convert = dart_sdk.convert;
+  const _interceptors = dart_sdk._interceptors;
+  const io = dart_sdk.io;
+  const async = dart_sdk.async;
+  const _js_helper = dart_sdk._js_helper;
+  const dart = dart_sdk.dart;
+  const dartx = dart_sdk.dartx;
+  const framework = packages__flutter__src__widgets__widget_span$46dart.src__widgets__framework;
+  const navigator = packages__flutter__src__widgets__widget_span$46dart.src__widgets__navigator;
+  const basic = packages__flutter__src__widgets__widget_span$46dart.src__widgets__basic;
+  const widget_inspector = packages__flutter__src__widgets__widget_span$46dart.src__widgets__widget_inspector;
+  const text = packages__flutter__src__widgets__widget_span$46dart.src__widgets__text;
+  const http = packages__http__src__multipart_request$46dart.http;
+  const world_time = packages__awesomequotes__services__world_time$46dart.services__world_time;
+  const scaffold = packages__flutter__src__material__icon_button$46dart.src__material__scaffold;
+  const colors = packages__flutter__src__material__colors$46dart.src__material__colors;
+  const flex = packages__flutter__src__rendering__flex$46dart.src__rendering__flex;
+  const progress_indicator = packages__flutter__src__material__progress_indicator$46dart.src__material__progress_indicator;
+  const text_style = packages__flutter__src__painting__strut_style$46dart.src__painting__text_style;
+  var loading = Object.create(dart.library);
+  dart._checkModuleNullSafetyMode(false);
+  var T = {
+    StringL: () => (T.StringL = dart.constFn(dart.legacy(core.String)))(),
+    JSArrayOfStringL: () => (T.JSArrayOfStringL = dart.constFn(_interceptors.JSArray$(T.StringL())))(),
+    SocketExceptionL: () => (T.SocketExceptionL = dart.constFn(dart.legacy(io.SocketException)))(),
+    VoidToNull: () => (T.VoidToNull = dart.constFn(dart.fnType(core.Null, [])))(),
+    ObjectL: () => (T.ObjectL = dart.constFn(dart.legacy(core.Object)))(),
+    IdentityMapOfStringL$dynamic: () => (T.IdentityMapOfStringL$dynamic = dart.constFn(_js_helper.IdentityMap$(T.StringL(), dart.dynamic)))(),
+    _LocationL: () => (T._LocationL = dart.constFn(dart.legacy(widget_inspector._Location)))(),
+    WidgetL: () => (T.WidgetL = dart.constFn(dart.legacy(framework.Widget)))(),
+    JSArrayOfWidgetL: () => (T.JSArrayOfWidgetL = dart.constFn(_interceptors.JSArray$(T.WidgetL())))()
+  };
+  const CT = Object.create({
+    _: () => (C, CT)
+  });
+  dart.defineLazy(CT, {
+    get C1() {
+      return C[1] = dart.constList([], T._LocationL());
+    },
+    get C0() {
+      return C[0] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[1] || CT.C1,
+        [_Location_name]: null,
+        [_Location_column]: 19,
+        [_Location_line]: 16,
+        [_Location_file]: "file:///C:/Users/asd/Desktop/coding-stuffs/flutter_learning/wta/world_time_app/lib/pages/loading.dart"
+      });
+    },
+    get C4() {
+      return C[4] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "data",
+        [_Location_column]: 24,
+        [_Location_line]: 17,
+        [_Location_file]: null
+      });
+    },
+    get C3() {
+      return C[3] = dart.constList([C[4] || CT.C4], T._LocationL());
+    },
+    get C2() {
+      return C[2] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[3] || CT.C3,
+        [_Location_name]: null,
+        [_Location_column]: 19,
+        [_Location_line]: 17,
+        [_Location_file]: "file:///C:/Users/asd/Desktop/coding-stuffs/flutter_learning/wta/world_time_app/lib/pages/loading.dart"
+      });
+    },
+    get C7() {
+      return C[7] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "height",
+        [_Location_column]: 22,
+        [_Location_line]: 18,
+        [_Location_file]: null
+      });
+    },
+    get C6() {
+      return C[6] = dart.constList([C[7] || CT.C7], T._LocationL());
+    },
+    get C5() {
+      return C[5] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[6] || CT.C6,
+        [_Location_name]: null,
+        [_Location_column]: 13,
+        [_Location_line]: 18,
+        [_Location_file]: "file:///C:/Users/asd/Desktop/coding-stuffs/flutter_learning/wta/world_time_app/lib/pages/loading.dart"
+      });
+    },
+    get C10() {
+      return C[10] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "data",
+        [_Location_column]: 15,
+        [_Location_line]: 20,
+        [_Location_file]: null
+      });
+    },
+    get C11() {
+      return C[11] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "style",
+        [_Location_column]: 15,
+        [_Location_line]: 21,
+        [_Location_file]: null
+      });
+    },
+    get C9() {
+      return C[9] = dart.constList([C[10] || CT.C10, C[11] || CT.C11], T._LocationL());
+    },
+    get C8() {
+      return C[8] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[9] || CT.C9,
+        [_Location_name]: null,
+        [_Location_column]: 13,
+        [_Location_line]: 19,
+        [_Location_file]: "file:///C:/Users/asd/Desktop/coding-stuffs/flutter_learning/wta/world_time_app/lib/pages/loading.dart"
+      });
+    },
+    get C14() {
+      return C[14] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "mainAxisAlignment",
+        [_Location_column]: 11,
+        [_Location_line]: 13,
+        [_Location_file]: null
+      });
+    },
+    get C15() {
+      return C[15] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "children",
+        [_Location_column]: 11,
+        [_Location_line]: 14,
+        [_Location_file]: null
+      });
+    },
+    get C13() {
+      return C[13] = dart.constList([C[14] || CT.C14, C[15] || CT.C15], T._LocationL());
+    },
+    get C12() {
+      return C[12] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[13] || CT.C13,
+        [_Location_name]: null,
+        [_Location_column]: 16,
+        [_Location_line]: 12,
+        [_Location_file]: "file:///C:/Users/asd/Desktop/coding-stuffs/flutter_learning/wta/world_time_app/lib/pages/loading.dart"
+      });
+    },
+    get C18() {
+      return C[18] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "child",
+        [_Location_column]: 9,
+        [_Location_line]: 12,
+        [_Location_file]: null
+      });
+    },
+    get C17() {
+      return C[17] = dart.constList([C[18] || CT.C18], T._LocationL());
+    },
+    get C16() {
+      return C[16] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[17] || CT.C17,
+        [_Location_name]: null,
+        [_Location_column]: 13,
+        [_Location_line]: 11,
+        [_Location_file]: "file:///C:/Users/asd/Desktop/coding-stuffs/flutter_learning/wta/world_time_app/lib/pages/loading.dart"
+      });
+    },
+    get C21() {
+      return C[21] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "backgroundColor",
+        [_Location_column]: 7,
+        [_Location_line]: 10,
+        [_Location_file]: null
+      });
+    },
+    get C22() {
+      return C[22] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: null,
+        [_Location_name]: "body",
+        [_Location_column]: 7,
+        [_Location_line]: 11,
+        [_Location_file]: null
+      });
+    },
+    get C20() {
+      return C[20] = dart.constList([C[21] || CT.C21, C[22] || CT.C22], T._LocationL());
+    },
+    get C19() {
+      return C[19] = dart.const({
+        __proto__: widget_inspector._Location.prototype,
+        [_Location_parameterLocations]: C[20] || CT.C20,
+        [_Location_name]: null,
+        [_Location_column]: 10,
+        [_Location_line]: 9,
+        [_Location_file]: "file:///C:/Users/asd/Desktop/coding-stuffs/flutter_learning/wta/world_time_app/lib/pages/loading.dart"
+      });
+    }
+  }, false);
+  var C = Array(23).fill(void 0);
+  var I = ["package:awesomequotes/pages/loading.dart"];
+  loading.Loading = class Loading extends framework.StatefulWidget {
+    createState() {
+      return new loading._LoadingState.new();
+    }
+  };
+  (loading.Loading.new = function(opts) {
+    let $36creationLocationd_0dea112b090073317d4 = opts && '$creationLocationd_0dea112b090073317d4' in opts ? opts.$creationLocationd_0dea112b090073317d4 : null;
+    loading.Loading.__proto__.new.call(this, {$creationLocationd_0dea112b090073317d4: $36creationLocationd_0dea112b090073317d4});
+    ;
+  }).prototype = loading.Loading.prototype;
+  dart.addTypeTests(loading.Loading);
+  dart.addTypeCaches(loading.Loading);
+  dart.setMethodSignature(loading.Loading, () => ({
+    __proto__: dart.getMethods(loading.Loading.__proto__),
+    createState: dart.fnType(dart.legacy(loading._LoadingState), [])
+  }));
+  dart.setLibraryUri(loading.Loading, I[0]);
+  var _isConnected = dart.privateName(loading, "_isConnected");
+  loading._LoadingState = class _LoadingState extends framework.State$(dart.legacy(loading.Loading)) {
+    getCurrLocation() {
+      return async.async(dart.dynamic, function* getCurrLocation() {
+        try {
+          let ipResponse = (yield http.get(core.Uri.parse("https://api.ipify.org/?format=json")));
+          let ip = convert.jsonDecode(ipResponse.body);
+          let tmResponse = (yield http.get(core.Uri.parse("https://timezoneapi.io/api/ip/" + dart.str(ip) + "?token=agzIdrFRizVAJoLxMmmu")));
+          let tmData = dart.dsend(convert.jsonDecode(tmResponse.body), '_get', ["data"]);
+          let tmName = T.StringL().as(dart.dsend(dart.dsend(tmData, '_get', ["timezone"]), '_get', ["id"]));
+          let capital = T.StringL().as(dart.dsend(dart.dsend(tmData, '_get', ["timezone"]), '_get', ["capital"]));
+          let countryCode = T.StringL().as(dart.dsend(dart.dsend(tmData, '_get', ["timezone"]), '_get', ["country_code"]));
+          return T.JSArrayOfStringL().of([tmName, capital, countryCode]);
+        } catch (e) {
+          let ex = dart.getThrown(e);
+          if (T.SocketExceptionL().is(ex)) {
+            return false;
+          } else
+            throw e;
+        }
+      });
+    }
+    setConnection(con) {
+      this.setState(dart.fn(() => {
+        this[_isConnected] = con;
+      }, T.VoidToNull()));
+    }
+    setupWorldTime() {
+      return async.async(dart.void, (function* setupWorldTime() {
+        let userData = (yield this.getCurrLocation());
+        if (dart.equals(userData, false)) {
+          this.setConnection(false);
+          yield async.Future.delayed(new core.Duration.new({seconds: 1}));
+          this.setupWorldTime();
+        } else {
+          this.setConnection(true);
+          let instance = new world_time.WorldTime.new(T.StringL().as(dart.dsend(userData, '_get', [0])), T.StringL().as(dart.dsend(userData, '_get', [1])), T.StringL().as(dart.dsend(userData, '_get', [2])));
+          yield instance.getTime();
+          navigator.Navigator.pushReplacementNamed(T.ObjectL(), T.ObjectL(), this.context, "/home", {arguments: new (T.IdentityMapOfStringL$dynamic()).from(["location", instance.location, "time", instance.now, "listFlag", instance.listFlag, "menuFlag", instance.menuFlag, "daytime", instance.isDaytime])});
+        }
+      }).bind(this));
+    }
+    initState() {
+      super.initState();
+      this.setupWorldTime();
+    }
+    build(context) {
+      return loading.loadingUi(this[_isConnected]);
+    }
+  };
+  (loading._LoadingState.new = function() {
+    this[_isConnected] = true;
+    loading._LoadingState.__proto__.new.call(this);
+    ;
+  }).prototype = loading._LoadingState.prototype;
+  dart.addTypeTests(loading._LoadingState);
+  dart.addTypeCaches(loading._LoadingState);
+  dart.setMethodSignature(loading._LoadingState, () => ({
+    __proto__: dart.getMethods(loading._LoadingState.__proto__),
+    getCurrLocation: dart.fnType(dart.legacy(async.Future), []),
+    setConnection: dart.fnType(dart.void, [dart.legacy(core.bool)]),
+    setupWorldTime: dart.fnType(dart.void, []),
+    build: dart.fnType(dart.legacy(framework.Widget), [dart.legacy(framework.BuildContext)])
+  }));
+  dart.setLibraryUri(loading._LoadingState, I[0]);
+  dart.setFieldSignature(loading._LoadingState, () => ({
+    __proto__: dart.getFields(loading._LoadingState.__proto__),
+    [_isConnected]: dart.fieldType(dart.legacy(core.bool))
+  }));
+  var _Location_parameterLocations = dart.privateName(widget_inspector, "_Location.parameterLocations");
+  var _Location_name = dart.privateName(widget_inspector, "_Location.name");
+  var _Location_column = dart.privateName(widget_inspector, "_Location.column");
+  var _Location_line = dart.privateName(widget_inspector, "_Location.line");
+  var _Location_file = dart.privateName(widget_inspector, "_Location.file");
+  loading.loadingUi = function loadingUi(_isConnected) {
+    return new scaffold.Scaffold.new({backgroundColor: colors.Colors.grey._get(200), body: new basic.Center.new({child: new basic.Column.new({mainAxisAlignment: flex.MainAxisAlignment.center, children: T.JSArrayOfWidgetL().of([dart.dtest(_isConnected) ? new progress_indicator.CircularProgressIndicator.new({$creationLocationd_0dea112b090073317d4: C[0] || CT.C0}) : new text.Text.new("You are not connected to any connection!", {$creationLocationd_0dea112b090073317d4: C[2] || CT.C2}), new basic.SizedBox.new({height: 20.0, $creationLocationd_0dea112b090073317d4: C[5] || CT.C5}), new text.Text.new("Getting data", {style: new text_style.TextStyle.new({fontSize: 16.0}), $creationLocationd_0dea112b090073317d4: C[8] || CT.C8})]), $creationLocationd_0dea112b090073317d4: C[12] || CT.C12}), $creationLocationd_0dea112b090073317d4: C[16] || CT.C16}), $creationLocationd_0dea112b090073317d4: C[19] || CT.C19});
+  };
+  dart.trackLibraries("packages/awesomequotes/pages/loading.dart", {
+    "package:awesomequotes/pages/loading.dart": loading
+  }, {
+  }, '{"version":3,"sourceRoot":"","sources":["loading.dart"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AA8BiC;IAAe;;;;;;EAChD;;;;;;;;;;;AAKiC;AAC7B;AACW,4BACL,MAAM,SAAQ,eAAM;AACpB,mBAAK,mBAAW,AAAW,UAAD;AACrB,4BAAa,MAAM,SAAQ,eAChC,AAA8D,4CAA9B,EAAE;AAClC,uBAAoC,WAA3B,mBAAW,AAAW,UAAD,iBAAO;AAClC,sCAA2B,WAAZ,WAAN,MAAM,WAAC,uBAAY;AAC5B,uCAA4B,WAAZ,WAAN,MAAM,WAAC,uBAAY;AAC7B,2CAAgC,WAAZ,WAAN,MAAM,WAAC,uBAAY;AACxC,gBAAO,0BAAC,MAAM,EAAE,OAAO,EAAE,WAAW;;;AACpC;AACA,kBAAO;;;;MAEX;;kBAEwB;AAGpB,MAFF,cAAS;AACW,QAAlB,qBAAe,GAAG;;IAEtB;;AAEmB;AACb,wBAAW,MAAM;AACrB,YAAa,YAAT,QAAQ,EAAI;AACM,UAApB,mBAAc;AAC4B,UAA1C,MAAa,qBAAQ,gCAAkB;AACvB,UAAhB;;AAEmB,UAAnB,mBAAc;AACJ,yBAAW,4CAAkB,WAAR,QAAQ,WAAC,qBAAY,WAAR,QAAQ,WAAC,qBAAY,WAAR,QAAQ,WAAC;AAC1C,UAAxB,MAAM,AAAS,QAAD;AAWb,UAVS,mEACR,cACA,qBACW,6CACT,YAAY,AAAS,QAAD,WACpB,QAAQ,AAAS,QAAD,MAChB,YAAY,AAAS,QAAD,WACpB,YAAY,AAAS,QAAD,WACpB,WAAW,AAAS,QAAD;;MAI3B;;;AAImB,MAAX;AACU,MAAhB;IACF;UAG0B;AACxB,YAAO,mBAAU;IACnB;;;IA1DK,qBAAe;;;EA2DtB;;;;;;;;;;;;;;;;;;;;yCAtFiB;AACf,UAAO,6CACqB,AAAI,wBAAC,YACvB,6BACG,yCACgC,yCAC3B,oCACR,YAAY,IACN,gHACA,kBAAK,sGACX,gCAAiB,+DACjB,kBACE,wBACO,wCACK;EAM1B","file":"../../../../../../../../../packages/awesomequotes/pages/loading.dart.lib.js"}');
+  // Exports:
+  return {
+    pages__loading: loading
+  };
+}));
+
+//# sourceMappingURL=loading.dart.lib.js.map

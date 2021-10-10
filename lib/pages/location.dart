@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../services/world_time.dart';
 import 'package:http/http.dart';
 import 'loading.dart';
+import 'dart:io';
 
 class Location extends StatefulWidget {
   _LocationState createState() => _LocationState();
@@ -424,6 +425,7 @@ class _LocationState extends State<Location> {
         "time": instance.now,
         "menuFlag": instance.menuFlag,
         "daytime": instance.isDaytime,
+        "widget": instance,
       });
     } else {
       conHandler(_isConnected);
@@ -457,9 +459,9 @@ class _LocationState extends State<Location> {
 
   Future<bool> isConnect() async {
     try {
-      Response response = await get(Uri.parse("https://example.com/"));
+      await get(Uri.parse("https://example.com/"));
       return true;
-    } catch (_) {
+    } on SocketException {
       return false;
     }
   }

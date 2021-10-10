@@ -76,6 +76,7 @@ class _LoadingState extends State<Loading> {
           "listFlag": instance.listFlag,
           "menuFlag": instance.menuFlag,
           "daytime": instance.isDaytime,
+          "widget": instance,
         },
       );
     }

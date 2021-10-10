@@ -7,13 +7,13 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with WidgetsBindingObserver {
   Map data = {};
-  bool _isLoading = false;
+  var timer;
 
-  void updateTime() {
+  void updateTime([m = 1]) {
     setState(() {
-      data["time"] = data["time"].add(Duration(minutes: 1));
+      data["time"] = data["time"].add(Duration(minutes: m));
     });
   }
 
@@ -21,12 +21,34 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     newTimer();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    super.didChangeAppLifecycleState(state);
+    switch (state) {
+      case AppLifecycleState.resumed:
+        List newData = await data["widget"].getTime(true);
+        setState(() {
+          data["time"] = newData[0];
+          data["daytime"] = newData[1];
+        });
+        newTimer();
+        break;
+      case AppLifecycleState.inactive:
+        timer.cancel();
+        break;
+      case AppLifecycleState.paused:
+        break;
+      case AppLifecycleState.detached:
+        break;
+    }
   }
 
   void newTimer() {
-    Timer t =
-        Timer.periodic(Duration(seconds: 60 - DateTime.now().second), (timer) {
-      timer.cancel();
+    timer = Timer.periodic(Duration(seconds: 60 - DateTime.now().second), (t) {
+      t.cancel();
       updateTime();
       newTimer();
     });
@@ -72,41 +94,32 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 SizedBox(height: 10),
-                _isLoading
-                    ? CircularProgressIndicator()
-                    : FlatButton.icon(
-                        onPressed: () async {
-                          setState(() {
-                            _isLoading = true;
-                          });
-                          dynamic result =
-                              await Navigator.pushNamed(context, "/location");
-                          if (result != null) {
-                            setState(() {
-                              data = {
-                                'time': result['time'],
-                                'menuFlag': result['menuFlag'],
-                                'daytime': result['daytime'],
-                                'location': result['location'],
-                              };
-                            });
-                          } else {
-                            setState(() {
-                              _isLoading = false;
-                            });
-                          }
-                        },
-                        label: Text(
-                          "Edit location",
-                          style: TextStyle(
-                            color: Colors.grey[400],
-                          ),
-                        ),
-                        icon: Icon(
-                          Icons.edit_location,
-                          color: Colors.grey[400],
-                        ),
-                      ),
+                FlatButton.icon(
+                  onPressed: () async {
+                    dynamic result =
+                        await Navigator.pushNamed(context, "/location");
+                    if (result != null) {
+                      setState(() {
+                        data = {
+                          'time': result['time'],
+                          'menuFlag': result['menuFlag'],
+                          'daytime': result['daytime'],
+                          'location': result['location'],
+                        };
+                      });
+                    }
+                  },
+                  label: Text(
+                    "Edit location",
+                    style: TextStyle(
+                      color: Colors.grey[400],
+                    ),
+                  ),
+                  icon: Icon(
+                    Icons.edit_location,
+                    color: Colors.grey[400],
+                  ),
+                ),
               ],
             ),
           ),
